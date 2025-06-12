@@ -12,6 +12,7 @@ function App() {
   }
 
   const [toys, setToys] = useState([])
+  const [formData, setFormData] = useState({name: "", image: "", likes: 0})
 
   useEffect(() => {
     getToys()
@@ -30,7 +31,7 @@ function App() {
   return (
     <>
       <Header />
-      {showForm ? <ToyForm /> : null}
+      {showForm ? <ToyForm  formData={formData} setFormData={setFormData} setToys={setToys}/> : null}
       <div className="buttonContainer">
         <button onClick={handleClick}>Add a Toy</button>
       </div>
