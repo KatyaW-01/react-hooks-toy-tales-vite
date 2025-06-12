@@ -12,10 +12,21 @@ function ToyContainer({toys, setToys}) {
     setToys(updatedToys)
   }
 
+  function handleUpdatedToy(updateToy) {
+    const updatedLikedToys = toys.map(toy => {
+      if(toy.id === updateToy.id) {
+        return updateToy
+      } else {
+        return toy
+      }
+    })
+    setToys(updatedLikedToys)
+  }
+
   return (
     <div id="toy-collection">
       {toys.map((toy) => (
-        <ToyCard key={toy.id} toy={toy} setDeletedToy={setDeletedToy} handleDeleteToys={handleDeleteToys} setUpdateToy={setUpdateToy}/>
+        <ToyCard key={toy.id} toy={toy} setDeletedToy={setDeletedToy} handleDeleteToys={handleDeleteToys} setUpdateToy={setUpdateToy} handleUpdatedToy={handleUpdatedToy}/>
       ))}
     </div>
   );

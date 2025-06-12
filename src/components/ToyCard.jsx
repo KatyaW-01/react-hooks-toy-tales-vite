@@ -1,6 +1,6 @@
 import React from "react";
 
-function ToyCard({toy, setDeletedToy, handleDeleteToys, setUpdateToy}) {
+function ToyCard({toy, setDeletedToy, handleDeleteToys, setUpdateToy, handleUpdatedToy}) {
   async function handleDelete() {
     try {
       const response = await fetch(`http://localhost:3001/toys/${toy.id}`, {
@@ -21,10 +21,13 @@ function ToyCard({toy, setDeletedToy, handleDeleteToys, setUpdateToy}) {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify()
+        body: JSON.stringify({
+          likes: toy.likes + 1
+        })
       })
       const updatedToy = await response.json()
       setUpdateToy(updatedToy) //store the updated toy in state
+      handleUpdatedToy(updatedToy)
     } catch (error) {
       console.error("Error updating likes:", error)
     }
